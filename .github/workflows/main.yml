@@ -13,8 +13,8 @@ permissions:
   contents: read
 
 env:
-  GHCR_REGISTRY: ghcr.io
-  DOCKER_USERNAME: ignisda
+  GHCR_REGISTRY: gitea.chungulon.com
+  DOCKER_USERNAME: admin
 
 jobs:
   pre-workflow-checks:
@@ -82,7 +82,7 @@ jobs:
         id: changelog
         uses: metcalfc/changelog-generator@e5a31a2994bada7f5892d75974bd70e10ef983a7
         with:
-          myToken: ${{ secrets.GITHUB_TOKEN }}
+          myToken: ${{ secrets.GITEA_TOKEN }}
       - name: Create Release
         uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b
         with:
@@ -92,7 +92,7 @@ jobs:
           draft: false
           prerelease: false
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITEA_TOKEN }}
 
   build-transactional:
     needs: pre-workflow-checks
@@ -212,7 +212,7 @@ jobs:
         with:
           registry: ${{ env.GHCR_REGISTRY }}
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GITEA_TOKEN }}
       - name: Log in to the docker hub container registry
         uses: docker/login-action@28fdb31ff34708d19615a74d67103ddc2ea9725c
         continue-on-error: true
@@ -316,7 +316,7 @@ jobs:
       - name: Push to deployment branch
         uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITEA_TOKEN }}
           publish_dir: apps/docs/.vitepress/dist
           publish_branch: nf-docs
           force_orphan: true
