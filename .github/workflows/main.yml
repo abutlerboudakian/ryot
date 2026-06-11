@@ -107,6 +107,8 @@ jobs:
         with:
           node-version: "24"
           cache: "yarn"
+      - name: Enabled Corepack
+        run: corepack enable
       - name: Install dependencies
         run: yarn install --immutable
       - name: Build emails
