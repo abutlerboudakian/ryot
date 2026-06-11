@@ -115,7 +115,7 @@ jobs:
       - name: Copy templates to crates
         run: yarn workspace @ryot/transactional copy-templates
       - name: Upload templates artifact
-        uses: https://github.com/actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4
+        uses: https://github.com/actions/upload-artifact@v3
         with:
           name: templates
           retention-days: 1
@@ -181,7 +181,7 @@ jobs:
         run: |
           cross build --locked --target ${{ matrix.platform.target }} --release
       - name: Upload build artifact
-        uses: https://github.com/actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4
+        uses: https://github.com/actions/upload-artifact@v3
         with:
           name: backend-${{ steps.build.outputs.docker-arch }}
           path: ${{ github.workspace }}/target/${{ matrix.platform.target }}/release/backend
