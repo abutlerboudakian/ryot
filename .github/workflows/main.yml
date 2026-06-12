@@ -174,6 +174,14 @@ jobs:
           git: https://github.com/cross-rs/cross
           rev: 51f46f296253d8122c927c5bb933e3c4f27cc317
           locked: false
+      - name: Debug Docker
+        run: |
+          docker info
+          docker ps
+      - name: Verify cross
+        run: |
+          which cross
+          cross --version
       - name: Build
         env:
           UNKEY_ROOT_KEY: ${{ secrets.UNKEY_ROOT_KEY }}
