@@ -176,7 +176,8 @@ jobs:
           locked: false
       - name: Build
         env:
-          UNKEY_ROOT_KEY: ${{ secrets.UNKEY_ROOT_KEY }}
+          XARGO_HOME: /tmp/.xargo
+          CROSS_CONTAINER_ENGINE: docker
           APP_VERSION: ${{ steps.build.outputs.version }}
         run: |
           cross build --locked --target ${{ matrix.platform.target }} --release
