@@ -13,21 +13,6 @@ env:
   GHCR_REGISTRY: gitea.chungulon.com
 
 jobs:
-  testing:
-    runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
-    steps:
-      - name: Test stuff
-        run: |
-          docker login gitea.chungulon.com -u admin --password-stdin <<< "${{ secrets.PACKAGE_TOKEN }}"
-      - name: Log in to the ghcr container registry
-        uses: https://github.com/docker/login-action@28fdb31ff34708d19615a74d67103ddc2ea9725c
-        with:
-          registry: ${{ env.GHCR_REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITEA_TOKEN }}
   pre-workflow-checks:
     runs-on: ubuntu-latest
     outputs:
@@ -187,7 +172,7 @@ jobs:
         with:
           registry: ${{ env.GHCR_REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.GITEA_TOKEN }}
+          password: ${{ secrets.PACKAGE_TOKEN }}
       - name: Extract metadata for Docker
         id: meta
         uses: https://github.com/docker/metadata-action@c299e40c65443455700f0fdfc63efafe5b349051
