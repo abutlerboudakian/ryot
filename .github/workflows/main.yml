@@ -21,9 +21,7 @@ jobs:
     steps:
       - name: Test stuff
         run: |
-          echo "Actor: ${{ gitea.actor }}"
-          curl -v -u "${{ gitea.actor }}:${{ secrets.GITEA_TOKEN }}" \
-            https://gitea.chungulon.com/v2/
+          docker login gitea.domain.com -u admin --password-stdin <<< "${{ secrets.GITEA_TOKEN }}"
       - name: Log in to the ghcr container registry
         uses: https://github.com/docker/login-action@28fdb31ff34708d19615a74d67103ddc2ea9725c
         with:
