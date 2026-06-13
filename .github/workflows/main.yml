@@ -196,6 +196,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       packages: write
+      contents: read
     steps:
       - uses: https://github.com/actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
         with:
