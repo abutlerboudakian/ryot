@@ -176,7 +176,7 @@ jobs:
           locked: false
       - name: Build
         env:
-          XARGO_HOME: /tmp/.xargo
+          UNKEY_ROOT_KEY: "abc"
           CROSS_CONTAINER_ENGINE: docker
           APP_VERSION: ${{ steps.build.outputs.version }}
         run: |
