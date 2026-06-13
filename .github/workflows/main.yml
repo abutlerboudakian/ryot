@@ -13,6 +13,23 @@ env:
   GHCR_REGISTRY: gitea.chungulon.com
 
 jobs:
+  testing:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - name: Test stuff
+        run: |
+          echo "Actor: ${{ gitea.actor }}"
+          curl -v -u "${{ gitea.actor }}:${{ secrets.GITEA_TOKEN }}" \
+            https://gitea.chungulon.com/v2/
+      - name: Log in to the ghcr container registry
+        uses: https://github.com/docker/login-action@28fdb31ff34708d19615a74d67103ddc2ea9725c
+        with:
+          registry: ${{ env.GHCR_REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITEA_TOKEN }}
   pre-workflow-checks:
     runs-on: ubuntu-latest
     outputs:
